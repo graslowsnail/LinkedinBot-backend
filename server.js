@@ -5,11 +5,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 // routes 
-const linkedIn= require('./routes/linkedInRoutes.js');
+const linkedIn = require('./routes/linkedInRoutes.js');
 
 // express app
 const app = express();
 app.use(cors());
+app.use(express.json()); // Add this line to parse JSON request bodies
 
 // EXAMPLE: this is how a api call will be made to a api 
 app.use('/api', linkedIn );

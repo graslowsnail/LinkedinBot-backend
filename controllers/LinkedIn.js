@@ -1,13 +1,12 @@
 const { Builder, By, until } = require('selenium-webdriver');
-require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
 
-// Define the absolute path to the cookies.json file
 const cookiesFilePath = path.resolve(__dirname, 'cookies.json');
 
 const scrapeLinkedInLikes = async (req, res) => {
-    const url = "https://www.linkedin.com/posts/liane-nguyen-aa40141a8_last-week-i-graduated-from-mays-business-ugcPost-7196179241695105026-jZRB?utm_source=share&utm_medium=member_desktop"; 
+    const { url } = req.body;  // Extract URL from request body
     if (!url) {
         return res.status(400).send('URL parameter is required');
     }
