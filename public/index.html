@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LinkedIn Scraper</title>
+</head>
+<body>
+    <h1>LinkedIn Scraper</h1>
+    <form id="scrape-form">
+        <label for="url">LinkedIn Post URL:</label>
+        <input type="text" id="url" name="url" required>
+        <button type="submit">Scrape</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById('scrape-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const response = await fetch('/api/scrape', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+            if (response.ok) {
+                const blob = await response.blob();
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'profile_urls.csv';
+                link.click();
+            } else {
+                document.getElementById('result').textContent = 'An error occurred while scraping the LinkedIn post.';
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { scrapeLikesController } = require('../controllers/linkedinController');
 
-const {scrapeLinkedInLikes} = require ('../controllers/LinkedIn.js');
-
-// api/linked
-router.get('/linked', scrapeLinkedInLikes);
-router.post('/linkedin', scrapeLinkedInLikes);
+router.post('/scrape', scrapeLikesController);
 
 module.exports = router;
